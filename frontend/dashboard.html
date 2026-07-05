@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Healthcare AI - Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body class="dashboard-body">
+    <nav class="navbar">
+        <div style="display: flex; align-items: center; gap: 12px;">
+            <div style="width: 36px; height: 36px; background: rgba(15, 118, 110, 0.1); border-radius: 10px; display: flex; align-items: center; justify-content: center; color: var(--primary);">
+                <i data-lucide="activity" class="animate-heartbeat" style="width: 20px; height: 20px;"></i>
+            </div>
+            <h2 class="gradient-text">Healthcare AI</h2>
+        </div>
+        <div class="user-profile">
+            <span id="userNameDisplay">Welcome, User</span>
+            <button onclick="openProfileModal()" class="secondary-btn small">
+                <i data-lucide="user" style="width: 16px; height: 16px;"></i>
+                Profile
+            </button>
+            <a href="index.html" class="secondary-btn small">
+                <i data-lucide="home" style="width: 16px; height: 16px;"></i>
+                Home
+            </a>
+            <button onclick="logout()" class="secondary-btn small">
+                <i data-lucide="log-out" style="width: 16px; height: 16px;"></i>
+                Logout
+            </button>
+        </div>
+    </nav>
+
+    <div class="dashboard-container">
+        <!-- Main Prediction Form -->
+        <div class="card symptom-card">
+            <h3>Diagnostic Assistant</h3>
+            <p class="subtitle">Search and select symptoms to receive a highly accurate, AI-generated medical analysis.</p>
+            
+            <div class="custom-search">
+                <div style="position: relative;">
+                    <i data-lucide="search" style="position: absolute; left: 16px; top: 16px; color: var(--text-light); width: 20px; height: 20px;"></i>
+                    <input type="text" id="symptomSearchInput" placeholder="Search for symptoms (e.g., headache, fever)..." onkeyup="filterSymptoms()" onfocus="showDropdown()" style="padding-left: 48px;">
+                </div>
+                <div id="symptomDropdownList" class="custom-dropdown-list hidden">
+                    <!-- Dropdown options injected here -->
+                </div>
+            </div>
+            
+            <div id="selectedSymptoms" class="tags-container">
+                <!-- Symptoms will appear here as tags -->
+            </div>
+            
+            <button onclick="predictDisease()" class="primary-btn predict-btn">
+                <i data-lucide="brain-circuit" style="width: 20px; height: 20px;"></i>
+                Analyze Symptoms
+            </button>
+        </div>
+
+        <!-- Results Display -->
+        <div id="resultsSection" class="results-grid hidden">
+            <div class="result-card disease card">
+                <div class="icon">
+                    <i data-lucide="stethoscope"></i>
+                </div>
+                <h4>Predicted Condition</h4>
+                <h2 id="resDisease" class="gradient-text">...</h2>
+            </div>
+            
+            <div class="result-card medicine card">
+                <div class="icon">
+                    <i data-lucide="pill"></i>
+                </div>
+                <h4>Recommended Medicine</h4>
+                <p id="resMedicine">...</p>
+            </div>
+            
+            <div class="result-card diet card">
+                <div class="icon">
+                    <i data-lucide="apple"></i>
+                </div>
+                <h4>Dietary Plan</h4>
+                <p id="resDiet">...</p>
+            </div>
+            
+            <div class="result-card workout card">
+                <div class="icon">
+                    <i data-lucide="activity-square"></i>
+                </div>
+                <h4>Workout Routine</h4>
+                <p id="resWorkout">...</p>
+            </div>
+            
+            <div style="grid-column: 1 / -1; text-align: center; margin-top: 15px;">
+                <button onclick="saveRecord()" class="primary-btn" style="width: auto; padding: 0.875rem 2.5rem;">
+                    <i data-lucide="save" style="width: 18px; height: 18px;"></i>
+                    Save Record to History
+                </button>
+            </div>
+        </div>
+
+        <!-- History Display -->
+        <div class="card history-card">
+            <div class="header-row">
+                <h3>Patient History</h3>
+                <button onclick="loadHistory()" class="secondary-btn small">
+                    <i data-lucide="refresh-cw" style="width: 14px; height: 14px;"></i>
+                    Sync
+                </button>
+            </div>
+            <div class="table-responsive">
+                <table id="historyTable">
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Symptoms Logged</th>
+                            <th>AI Diagnosis</th>
+                        </tr>
+                    </thead>
+                    <tbody id="historyBody">
+                        <!-- History injected here -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Profile Modal -->
+    <div id="profileModal" class="modal-overlay hidden">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="gradient-text">Update Profile</h3>
+                <button class="close-btn" onclick="closeProfileModal()">
+                    <i data-lucide="x"></i>
+                </button>
+            </div>
+            
+            <form id="profileForm" class="auth-form" style="animation: none;">
+                <div class="input-row">
+                    <div class="input-group">
+                        <label>Full Name</label>
+                        <input type="text" id="profName" required>
+                    </div>
+                    <div class="input-group">
+                        <label>Username (Read-Only)</label>
+                        <input type="text" id="profUsername" readonly style="background-color: rgba(15, 23, 42, 0.05); color: var(--text-light); cursor: not-allowed;">
+                    </div>
+                </div>
+                <div class="input-group">
+                    <label>Email Address</label>
+                    <input type="email" id="profEmail" required>
+                </div>
+                <div class="input-row">
+                    <div class="input-group">
+                        <label>Age</label>
+                        <input type="number" id="profAge" required>
+                    </div>
+                    <div class="input-group">
+                        <label>Contact Number</label>
+                        <input type="text" id="profContact" required>
+                    </div>
+                </div>
+                <button type="submit" class="primary-btn">
+                    Save Changes
+                    <i data-lucide="save" style="width: 18px; height: 18px;"></i>
+                </button>
+                <div id="profError" class="error-msg"></div>
+                <div id="profSuccess" class="error-msg" style="color: var(--success);"></div>
+            </form>
+        </div>
+    </div>
+
+    <!-- History Record Modal -->
+    <div id="historyModal" class="modal-overlay hidden">
+        <div class="modal-content" style="max-width: 600px;">
+            <div class="modal-header">
+                <h3 class="gradient-text">Record Details</h3>
+                <button class="close-btn" onclick="closeHistoryModal()">
+                    <i data-lucide="x"></i>
+                </button>
+            </div>
+            
+            <div class="record-details" style="display: flex; flex-direction: column; gap: 1.5rem;">
+                <div>
+                    <strong style="color: var(--text-light); font-size: 0.9rem; text-transform: uppercase;">Date</strong>
+                    <div id="histDate" style="font-weight: 500; margin-top: 0.25rem;"></div>
+                </div>
+                <div>
+                    <strong style="color: var(--text-light); font-size: 0.9rem; text-transform: uppercase;">Symptoms</strong>
+                    <div id="histSymptoms" style="margin-top: 0.25rem;"></div>
+                </div>
+                <div>
+                    <strong style="color: var(--text-light); font-size: 0.9rem; text-transform: uppercase;">Predicted Disease</strong>
+                    <div style="margin-top: 0.5rem;">
+                        <span id="histDisease" class="table-tag" style="font-size: 1rem;"></span>
+                    </div>
+                </div>
+                <div style="background: rgba(15, 118, 110, 0.05); padding: 1.5rem; border-radius: var(--radius-md); border: 1px solid var(--border);">
+                    <h4 style="margin-top: 0; margin-bottom: 1rem; color: var(--primary);">Treatment Plan</h4>
+                    <div style="margin-bottom: 1rem;">
+                        <strong style="display: block; font-size: 0.9rem; color: var(--text-light); margin-bottom: 0.25rem;">Medicines</strong>
+                        <div id="histMedicines"></div>
+                    </div>
+                    <div style="margin-bottom: 1rem;">
+                        <strong style="display: block; font-size: 0.9rem; color: var(--text-light); margin-bottom: 0.25rem;">Diet</strong>
+                        <div id="histDiet"></div>
+                    </div>
+                    <div>
+                        <strong style="display: block; font-size: 0.9rem; color: var(--text-light); margin-bottom: 0.25rem;">Workout</strong>
+                        <div id="histWorkout"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        // Check auth on load
+        window.onload = function() {
+            const token = localStorage.getItem('access_token');
+            if(!token) {
+                window.location.href = 'login.html';
+            } else {
+                fetchUserData();
+                loadHistory();
+                loadSymptomsList();
+            }
+            // Initialize Lucide icons
+            lucide.createIcons();
+        }
+    </script>
+</body>
+</html>

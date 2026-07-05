@@ -1,0 +1,42 @@
+Disease,Diet_Recommendation,Workout_Recommendation
+Fungal infection,"Diet rich in vitamins A, C, and E, probiotics","Light to moderate exercises, keep affected areas dry"
+Allergy,"Anti-inflammatory foods, vitamin C rich fruits, avoid allergens",Low-impact indoor exercises to avoid pollen/dust
+GERD (Acid Reflux),"Low-acid foods, lean proteins, non-citrus fruits, oatmeal","Light exercises (walking, gentle yoga), avoid heavy lifting"
+Chronic cholestasis,"Low-fat diet, high fiber, lots of fluids, vitamin supplements","Light exercises, avoid strenuous activities"
+Drug Reaction,"Bland diet, easily digestible foods, avoid spicy/processed foods",Complete rest until symptoms subside
+Peptic Ulcer,"High fiber foods, probiotic-rich foods, avoid spicy/acidic foods","Light physical activity, avoid intense core workouts"
+AIDS,"High-protein, high-calorie diet, safe food handling","Moderate exercise to build muscle mass, avoid overexertion"
+Type 2 Diabetes,"Low glycemic index foods, lean proteins, high fiber","Regular aerobic exercise (walking, swimming), strength training"
+Gastroenteritis,"BRAT diet (Bananas, Rice, Applesauce, Toast), clear fluids","Complete rest, no exercise until fully recovered"
+Asthma,"Foods rich in vitamin D and antioxidants, avoid sulfites","Swimming, walking, yoga (focus on breathing exercises)"
+Hypertension,"DASH diet (fruits, vegetables, low-fat dairy, low sodium)","Regular aerobic exercise (30 mins a day), avoid heavy lifting"
+Migraine,"Magnesium-rich foods, stay hydrated, avoid triggers (caffeine, aged cheese)","Gentle yoga, stretching, avoid high-intensity workouts during attacks"
+Cervical spondylosis,"Calcium and vitamin D rich foods, anti-inflammatory diet","Neck stretches, gentle yoga, swimming, avoid high-impact sports"
+Paralysis (brain hemorrhage),"Soft, easily swallowable foods, high protein for recovery","Physiotherapy, assisted range-of-motion exercises"
+Jaundice,"Lots of fluids, easily digestible foods, avoid fatty/fried foods","Complete rest, very light walking once recovering"
+Malaria,"High-calorie, high-protein diet, lots of fluids (coconut water, soups)","Strict rest, avoid any physical exertion"
+Chicken pox,"Soft, bland foods, cold fluids, avoid salty/acidic foods",Complete rest to avoid spreading and conserve energy
+Dengue,"Papaya leaf extract, fluids, vitamin C rich foods, easily digestible diet","Complete bed rest, avoid any physical activity"
+Typhoid,"High-calorie, high-protein soft diet, avoid high fiber and spicy foods","Complete rest, avoid exercise until fully recovered"
+hepatitis A,"High-carb, low-fat diet, small frequent meals, plenty of fluids","Rest is crucial, very light activities only"
+Hepatitis B,"High-protein diet, lots of fruits and vegetables, avoid alcohol",Light to moderate exercise depending on energy levels
+Hepatitis C,"Balanced diet, limit iron and sodium, absolutely no alcohol","Moderate exercise (walking, cycling) as tolerated"
+Hepatitis D,"Nutrient-dense foods, low sodium, adequate protein","Light physical activity, frequent rest periods"
+Hepatitis E,"Clean water, well-cooked food, light easily digestible meals","Bed rest, avoid strenuous activities"
+Alcoholic hepatitis,"High-calorie, high-protein diet, vitamin supplements, zero alcohol","Light walking, avoid strenuous exercises"
+Tuberculosis (Recovery Phase),"High-protein, high-calorie diet (eggs, meat, milk), vitamins","Gradual increase in light exercises, breathing exercises"
+Common Cold,"Warm fluids (soups, herbal teas), vitamin C, honey and ginger","Rest, very light stretching if feeling okay"
+Bronchial Pneumonia (Recovery),"Warm fluids, high protein for recovery, vitamin C","Deep breathing exercises, short walks, avoid heavy exertion"
+Dimorphic hemmorhoids(piles),"High-fiber diet (whole grains, fruits, vegetables), lots of water","Walking, swimming, avoid heavy lifting or prolonged sitting"
+Coronary Artery Disease,"Heart-healthy diet (Mediterranean diet), low saturated fat, low sodium",Regular aerobic exercise under medical supervision
+Varicose Veins,"High-fiber diet, foods rich in rutin and flavonoids","Walking, swimming, cycling, leg elevation exercises"
+Hypothyroidism,"Iodine-rich foods, selenium (Brazil nuts), high fiber",Regular cardiovascular exercise to boost metabolism
+Hyperthyroidism,"High-calorie diet, calcium and vitamin D, cruciferous vegetables","Light exercises (yoga, tai chi), avoid high-intensity workouts"
+Hypoglycemia,"Small frequent meals, complex carbohydrates with protein","Keep fast-acting carbs nearby during workouts, moderate exercise"
+Osteoarthritis,"Anti-inflammatory diet (omega-3s), calcium, vitamin D, maintain healthy weight","Low-impact exercises (swimming, cycling), stretching"
+Rheumatoid Arthritis,"Anti-inflammatory foods (fatty fish, berries, nuts), Mediterranean diet","Range-of-motion exercises, water aerobics, gentle strengthening"
+(vertigo) Paroymsal  Positional Vertigo,"Stay hydrated, limit caffeine and alcohol, low sodium","Epley maneuver, balance exercises, avoid sudden head movements"
+Acne,"Low glycemic index foods, zinc-rich foods, avoid excessive dairy and sugar","Regular exercise to reduce stress, shower immediately after"
+Urinary tract infection,"Cranberry juice, lots of water, vitamin C, avoid caffeine/alcohol","Light exercises, avoid cycling or exercises that put pressure on pelvic area"
+Psoriasis,"Anti-inflammatory diet, omega-3 fatty acids, gluten-free (if sensitive)",Regular moderate exercise to maintain healthy weight
+Impetigo,"Nutrient-rich diet to boost immune system, lots of fluids","Avoid contact sports, light individual exercises only"

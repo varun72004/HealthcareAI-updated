@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Healthcare AI - Login & Register</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body class="auth-body" style="min-height: 100vh; position: relative;">
+    <!-- Navigation (Simple) -->
+    <nav class="navbar" style="position: absolute; top: 0; left: 0; width: 100%; box-sizing: border-box; padding: 1rem 5%; z-index: 10;">
+        <div style="display: flex; align-items: center; gap: 12px;">
+            <div style="width: 36px; height: 36px; background: rgba(15, 118, 110, 0.1); border-radius: 10px; display: flex; align-items: center; justify-content: center; color: var(--primary);">
+                <i data-lucide="activity" class="animate-heartbeat" style="width: 20px; height: 20px;"></i>
+            </div>
+            <a href="index.html" style="text-decoration: none;"><h2 class="gradient-text">Healthcare AI</h2></a>
+        </div>
+        <div class="nav-actions">
+            <a href="index.html" class="secondary-btn">Back to Home</a>
+        </div>
+    </nav>
+
+    <div class="auth-container">
+        <div class="glass-panel">
+            <div style="margin-bottom: 2rem;">
+                <div style="width: 48px; height: 48px; background: rgba(15, 118, 110, 0.1); border-radius: 12px; display: flex; align-items: center; justify-content: center; color: var(--primary); margin: 0 auto 1rem;">
+                    <i data-lucide="shield" style="width: 24px; height: 24px;"></i>
+                </div>
+                <h2 style="font-size: 1.75rem; color: var(--text-dark); margin-bottom: 0.5rem;">Welcome</h2>
+                <p style="color: var(--text-light); font-size: 0.95rem;">Enter your details to access your health dashboard</p>
+            </div>
+
+            <div class="tab-container">
+                <button class="tab-btn active" onclick="switchTab('login')">Log In</button>
+                <button class="tab-btn" onclick="switchTab('register')">Register</button>
+            </div>
+
+            <!-- Login Form -->
+            <form id="loginForm" class="auth-form">
+                <div class="input-group">
+                    <label>Username</label>
+                    <input type="text" id="loginUsername" required placeholder="Enter your username">
+                </div>
+                <div class="input-group">
+                    <label>Password</label>
+                    <input type="password" id="loginPassword" required placeholder="Enter your password">
+                </div>
+                <div id="loginError" class="error-msg" style="color: red; font-size: 0.9rem; text-align: center;"></div>
+                <button type="submit" class="primary-btn w-100" style="margin-top: 0.5rem; justify-content: center;">
+                    Sign In
+                    <i data-lucide="arrow-right"></i>
+                </button>
+            </form>
+
+            <!-- Register Form -->
+            <form id="registerForm" class="auth-form hidden">
+                <div class="responsive-grid">
+                    <div class="input-group">
+                        <label>Full Name</label>
+                        <input type="text" id="regName" required placeholder="John Doe">
+                    </div>
+                    <div class="input-group">
+                        <label>Username</label>
+                        <input type="text" id="regUsername" required placeholder="johndoe">
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <label>Email Address</label>
+                    <input type="email" id="regEmail" required placeholder="john@example.com">
+                </div>
+
+                <div class="responsive-grid">
+                    <div class="input-group">
+                        <label>Age</label>
+                        <input type="number" id="regAge" required placeholder="25" min="1" max="120">
+                    </div>
+                    <div class="input-group">
+                        <label>Contact Number</label>
+                        <input type="text" id="regContact" required placeholder="+91 XXXXX XXXXX">
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <label>Password</label>
+                    <input type="password" id="regPassword" required placeholder="Create a strong password">
+                </div>
+
+                <div id="regError" class="error-msg" style="color: red; font-size: 0.9rem; text-align: center;"></div>
+                <button type="submit" class="primary-btn w-100" style="margin-top: 0.5rem; justify-content: center;">
+                    Create Account
+                    <i data-lucide="user-plus"></i>
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Toast Notification Container -->
+    <div id="toastContainer" class="toast-container"></div>
+
+    <script src="script.js"></script>
+</body>
+</html>
