@@ -15,13 +15,13 @@ from typing import List
 from pathlib import Path
 import sys
 
-from database import engine, Base, get_db
-import models
-import schemas
+from .database import engine, Base, get_db
+from .models import *
+from .schemas import *
 import os
 from dotenv import load_dotenv
 
-from logic import predict_disease_and_recommend, features_list, valid_symptoms
+from .logic import predict_disease_and_recommend, features_list, valid_symptoms
 
 # Load environment variables from .env file
 load_dotenv()
