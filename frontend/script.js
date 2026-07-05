@@ -344,9 +344,35 @@ async function loadHistory() {
                     <td>${date}</td>
                     <td style="color: var(--text-light);">${item.symptoms}</td>
                     <td><span class="table-tag">${item.predicted_disease}</span></td>
+                    <td style="text-align: right;">
+                        <button onclick="event.stopPropagation(); deleteHistory(${item.id})" style="background: transparent; border: none; color: #ef4444; cursor: pointer; padding: 4px 8px; border-radius: 4px;">
+                            Delete
+                        </button>
+                    </td>
                 </tr>
             `;
         });
+    }
+}
+
+async function deleteHistory(recordId) {
+    if(!confirm("Are you sure you want to delete this prediction record?")) return;
+    
+    const token = localStorage.getItem('access_token');
+    try {
+        const res = await fetch(`${API_URL}/history/${recordId}`, {
+            method: 'DELETE',
+            headers: { 'Authorization': `Bearer ${token}` }
+        });
+        
+        if(res.ok) {
+            showToast("Record deleted successfully", "success");
+            loadHistory(); // Refresh the table
+        } else {
+            showToast("Failed to delete record", "error");
+        }
+    } catch(err) {
+        showToast("Server error during deletion", "error");
     }
 }
 

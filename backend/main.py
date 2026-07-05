@@ -173,6 +173,20 @@ def get_user_history(current_user: models.User = Depends(get_current_user), db: 
     history = db.query(models.PredictionHistory).filter(models.PredictionHistory.user_id == current_user.id).order_by(models.PredictionHistory.created_at.desc()).all()
     return history
 
+@app.delete("/history/{record_id}")
+def delete_user_history(record_id: int, current_user: models.User = Depends(get_current_user), db: Session = Depends(get_db)):
+    record = db.query(models.PredictionHistory).filter(
+        models.PredictionHistory.id == record_id,
+        models.PredictionHistory.user_id == current_user.id
+    ).first()
+    
+    if not record:
+        raise HTTPException(status_code=404, detail="Record not found")
+        
+    db.delete(record)
+    db.commit()
+    return {"message": "Record deleted successfully"}
+
 # --- Static Frontend Serving ---
 from fastapi.staticfiles import StaticFiles
 
