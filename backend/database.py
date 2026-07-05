@@ -12,7 +12,9 @@ from dotenv import load_dotenv
 load_dotenv()
 
 # PostgreSQL connection string
-DATABASE_URL = os.getenv("DATABASE_URL")
+DATABASE_URL = os.getenv("DATABASE_URL", "sqlite:///./test.db")
+if DATABASE_URL and DATABASE_URL.startswith("postgres://"):
+    DATABASE_URL = DATABASE_URL.replace("postgres://", "postgresql://", 1)
 
 # Core interface to the database
 engine = create_engine(DATABASE_URL)
