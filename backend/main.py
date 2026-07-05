@@ -172,3 +172,12 @@ def save_prediction_record(request: schemas.SaveRecordRequest, current_user: mod
 def get_user_history(current_user: models.User = Depends(get_current_user), db: Session = Depends(get_db)):
     history = db.query(models.PredictionHistory).filter(models.PredictionHistory.user_id == current_user.id).order_by(models.PredictionHistory.created_at.desc()).all()
     return history
+
+# --- Static Frontend Serving ---
+from fastapi.staticfiles import StaticFiles
+
+# Get the absolute path to the frontend directory
+frontend_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), "frontend")
+
+# Mount the static files at the root route
+app.mount("/", StaticFiles(directory=frontend_path, html=True), name="frontend")
