@@ -345,7 +345,7 @@ async function loadHistory() {
                     <td style="color: var(--text-light);">${item.symptoms}</td>
                     <td><span class="table-tag">${item.predicted_disease}</span></td>
                     <td style="text-align: right;">
-                        <button onclick="event.stopPropagation(); deleteHistory(${item.id})" class="close-btn" style="color: #ef4444; background: rgba(239, 68, 68, 0.05); width: 32px; height: 32px; display: inline-flex;">
+                        <button onclick="event.stopPropagation(); showDeleteConfirm(${item.id})" class="close-btn" style="color: #ef4444; background: rgba(239, 68, 68, 0.05); width: 32px; height: 32px; display: inline-flex;">
                             <i data-lucide="trash-2" style="width: 16px; height: 16px;"></i>
                         </button>
                     </td>
@@ -356,8 +356,33 @@ async function loadHistory() {
     }
 }
 
-async function deleteHistory(recordId, fromModal = false) {
-    if(!confirm("Are you sure you want to delete this prediction record?")) return;
+let pendingDeleteId = null;
+let pendingDeleteFromModal = false;
+
+function showDeleteConfirm(recordId, fromModal = false) {
+    pendingDeleteId = recordId;
+    pendingDeleteFromModal = fromModal;
+    document.getElementById('deleteConfirmModal').classList.remove('hidden');
+    
+    // Wire up the confirm button
+    const confirmBtn = document.getElementById('confirmDeleteBtn');
+    if(confirmBtn) {
+        confirmBtn.onclick = executeDelete;
+    }
+}
+
+function closeDeleteConfirmModal() {
+    pendingDeleteId = null;
+    pendingDeleteFromModal = false;
+    document.getElementById('deleteConfirmModal').classList.add('hidden');
+}
+
+async function executeDelete() {
+    if (pendingDeleteId === null) return;
+    const recordId = pendingDeleteId;
+    const fromModal = pendingDeleteFromModal;
+    
+    closeDeleteConfirmModal(); // Hide modal immediately
     
     const token = localStorage.getItem('access_token');
     try {
@@ -393,7 +418,7 @@ function openHistoryModal(index) {
     
     const modalDeleteBtn = document.getElementById('modalDeleteBtn');
     if (modalDeleteBtn) {
-        modalDeleteBtn.onclick = () => deleteHistory(item.id, true);
+        modalDeleteBtn.onclick = () => showDeleteConfirm(item.id, true);
     }
     
     document.getElementById('historyModal').classList.remove('hidden');
