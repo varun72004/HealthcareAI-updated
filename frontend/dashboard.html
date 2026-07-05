@@ -178,9 +178,14 @@
         <div class="modal-content" style="max-width: 600px;">
             <div class="modal-header">
                 <h3 class="gradient-text">Record Details</h3>
-                <button class="close-btn" onclick="closeHistoryModal()">
-                    <i data-lucide="x"></i>
-                </button>
+                <div style="display: flex; gap: 0.5rem;">
+                    <button id="modalDeleteBtn" class="close-btn" style="color: #ef4444; background: rgba(239, 68, 68, 0.1);">
+                        <i data-lucide="trash-2"></i>
+                    </button>
+                    <button class="close-btn" onclick="closeHistoryModal()">
+                        <i data-lucide="x"></i>
+                    </button>
+                </div>
             </div>
             
             <div class="record-details" style="display: flex; flex-direction: column; gap: 1.5rem;">

@@ -345,17 +345,18 @@ async function loadHistory() {
                     <td style="color: var(--text-light);">${item.symptoms}</td>
                     <td><span class="table-tag">${item.predicted_disease}</span></td>
                     <td style="text-align: right;">
-                        <button onclick="event.stopPropagation(); deleteHistory(${item.id})" style="background: transparent; border: none; color: #ef4444; cursor: pointer; padding: 4px 8px; border-radius: 4px;">
-                            Delete
+                        <button onclick="event.stopPropagation(); deleteHistory(${item.id})" class="close-btn" style="color: #ef4444; background: rgba(239, 68, 68, 0.05); width: 32px; height: 32px; display: inline-flex;">
+                            <i data-lucide="trash-2" style="width: 16px; height: 16px;"></i>
                         </button>
                     </td>
                 </tr>
             `;
         });
+        if(window.lucide) lucide.createIcons();
     }
 }
 
-async function deleteHistory(recordId) {
+async function deleteHistory(recordId, fromModal = false) {
     if(!confirm("Are you sure you want to delete this prediction record?")) return;
     
     const token = localStorage.getItem('access_token');
@@ -368,6 +369,9 @@ async function deleteHistory(recordId) {
         if(res.ok) {
             showToast("Record deleted successfully", "success");
             loadHistory(); // Refresh the table
+            if (fromModal) {
+                closeHistoryModal();
+            }
         } else {
             showToast("Failed to delete record", "error");
         }
@@ -386,6 +390,11 @@ function openHistoryModal(index) {
     document.getElementById('histMedicines').innerText = item.medicines;
     document.getElementById('histDiet').innerText = item.diet;
     document.getElementById('histWorkout').innerText = item.workout;
+    
+    const modalDeleteBtn = document.getElementById('modalDeleteBtn');
+    if (modalDeleteBtn) {
+        modalDeleteBtn.onclick = () => deleteHistory(item.id, true);
+    }
     
     document.getElementById('historyModal').classList.remove('hidden');
 }
