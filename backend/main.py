@@ -16,8 +16,8 @@ from pathlib import Path
 import sys
 
 from .database import engine, Base, get_db
-from .models import *
-from .schemas import *
+from . import models
+from . import schemas
 import os
 from dotenv import load_dotenv
 
