@@ -344,11 +344,6 @@ async function loadHistory() {
                     <td>${date}</td>
                     <td style="color: var(--text-light);">${item.symptoms}</td>
                     <td><span class="table-tag">${item.predicted_disease}</span></td>
-                    <td style="text-align: right;">
-                        <button onclick="event.stopPropagation(); showDeleteConfirm(${item.id})" class="close-btn" style="color: #ef4444; background: rgba(239, 68, 68, 0.05); width: 32px; height: 32px; display: inline-flex;">
-                            <i data-lucide="trash-2" style="width: 16px; height: 16px;"></i>
-                        </button>
-                    </td>
                 </tr>
             `;
         });
@@ -356,54 +351,7 @@ async function loadHistory() {
     }
 }
 
-let pendingDeleteId = null;
-let pendingDeleteFromModal = false;
 
-function showDeleteConfirm(recordId, fromModal = false) {
-    pendingDeleteId = recordId;
-    pendingDeleteFromModal = fromModal;
-    document.getElementById('deleteConfirmModal').classList.remove('hidden');
-    
-    // Wire up the confirm button
-    const confirmBtn = document.getElementById('confirmDeleteBtn');
-    if(confirmBtn) {
-        confirmBtn.onclick = executeDelete;
-    }
-}
-
-function closeDeleteConfirmModal() {
-    pendingDeleteId = null;
-    pendingDeleteFromModal = false;
-    document.getElementById('deleteConfirmModal').classList.add('hidden');
-}
-
-async function executeDelete() {
-    if (pendingDeleteId === null) return;
-    const recordId = pendingDeleteId;
-    const fromModal = pendingDeleteFromModal;
-    
-    closeDeleteConfirmModal(); // Hide modal immediately
-    
-    const token = localStorage.getItem('access_token');
-    try {
-        const res = await fetch(`${API_URL}/history/${recordId}`, {
-            method: 'DELETE',
-            headers: { 'Authorization': `Bearer ${token}` }
-        });
-        
-        if(res.ok) {
-            showToast("Record deleted successfully", "success");
-            loadHistory(); // Refresh the table
-            if (fromModal) {
-                closeHistoryModal();
-            }
-        } else {
-            showToast("Failed to delete record", "error");
-        }
-    } catch(err) {
-        showToast("Server error during deletion", "error");
-    }
-}
 
 function openHistoryModal(index) {
     const item = userHistoryData[index];
@@ -415,11 +363,6 @@ function openHistoryModal(index) {
     document.getElementById('histMedicines').innerText = item.medicines;
     document.getElementById('histDiet').innerText = item.diet;
     document.getElementById('histWorkout').innerText = item.workout;
-    
-    const modalDeleteBtn = document.getElementById('modalDeleteBtn');
-    if (modalDeleteBtn) {
-        modalDeleteBtn.onclick = () => showDeleteConfirm(item.id, true);
-    }
     
     document.getElementById('historyModal').classList.remove('hidden');
 }
